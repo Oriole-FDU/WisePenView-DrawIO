@@ -1,0 +1,501 @@
+/**
+ * WisePen 对 DrawIO 的样式覆盖入口。
+ *
+ * 约定：
+ * 1. 不直接修改 grapheditor.css，方便后续同步 DrawIO 上游。
+ * 2. 只放 WisePen 产品层面的视觉覆盖，不在这里写功能逻辑。
+ * 3. WisePenView 通过 URL 传入 wisepenTheme / wisepenColorScheme，PreConfig 会同步到 html 属性。
+ */
+
+:root,
+html[data-theme='light'],
+html[data-theme='default'] {
+	--app-font-family:
+		'Inter',
+		-apple-system,
+		'Noto Sans SC',
+		BlinkMacSystemFont,
+		'Segoe UI',
+		Roboto,
+		Helvetica,
+		Arial,
+		'PingFang SC',
+		'Hiragino Sans GB',
+		'Microsoft YaHei',
+		sans-serif;
+	--accent: #1e6f9f;
+	--accent-foreground: #ffffff;
+	--background: #f7f9fb;
+	--border: #e4e7ec;
+	--field-background: #ffffff;
+	--field-foreground: #111827;
+	--focus: #22c7a9;
+	--foreground: #111827;
+	--muted: #6b7280;
+	--overlay: #ffffff;
+	--overlay-foreground: #111827;
+	--scrollbar: #d5dae2;
+	--separator: #e9ecef;
+	--surface: #ffffff;
+	--surface-foreground: #111827;
+	--surface-secondary: #fafbfc;
+	--surface-tertiary: #f0f3f6;
+	--primary: #1e6f9f;
+	--primary-hover: #2a82b8;
+	--primary-light: #4ea8de;
+	--primary-dark: #165a82;
+	--surface-hover: #f3f6f9;
+	--text-tertiary: #9ca3af;
+	--card-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+	--radius: 8px;
+	--radius-sm: 4px;
+	--radius-lg: 8px;
+	--radius-xl: 12px;
+	--space-2xs: 4px;
+	--space-xs: 8px;
+	--space-sm: 12px;
+	--space-md: 16px;
+	--accent-soft: color-mix(in srgb, var(--accent) 10%, transparent);
+	--accent-border: color-mix(in srgb, var(--accent) 30%, var(--border));
+
+	--ge-panel-color: var(--surface);
+	--toolbar-color: var(--surface);
+	--workspace-color: var(--background);
+	--inactive-color: var(--surface-tertiary);
+	--active-color: var(--accent-soft);
+	--primary-color: color-mix(in srgb, var(--primary) 16%, var(--surface));
+	--primary-hover-color: color-mix(in srgb, var(--primary) 24%, var(--surface));
+	--accent-color: var(--accent-soft);
+	--accent-hover-color: color-mix(in srgb, var(--accent) 16%, transparent);
+	--accent-text-color: var(--primary);
+	--border-color: var(--border);
+	--highlight-color: var(--surface-hover);
+	--scrollbar-hover-color: var(--text-tertiary);
+	--text-color: var(--foreground);
+	--dark-color: var(--background);
+	--ge-dark-panel-color: var(--surface);
+	--dark-toolbar-color: var(--surface-secondary);
+	--dark-border-color: var(--border);
+	--dark-text-color: var(--foreground);
+	--dark-accent-color: var(--accent-soft);
+	--dark-accent-text-color: var(--primary-light);
+	--dark-active-accent-color: color-mix(in srgb, var(--primary) 24%, var(--surface));
+	--dark-inverse-active-color: var(--foreground);
+	--dark-highlight-color: var(--surface-hover);
+	--dark-header-color: var(--surface);
+}
+
+html[data-theme='dark'],
+html.dark {
+	color-scheme: dark;
+	--accent: #4ea8de;
+	--accent-foreground: #111827;
+	--background: #0f172a;
+	--border: #374151;
+	--field-background: #111827;
+	--field-foreground: #f9fafb;
+	--focus: #2dd4bf;
+	--foreground: #f9fafb;
+	--muted: #d1d5db;
+	--overlay: #111827;
+	--overlay-foreground: #f9fafb;
+	--scrollbar: #374151;
+	--separator: #2d3748;
+	--surface: #111827;
+	--surface-foreground: #f9fafb;
+	--surface-secondary: #1f2937;
+	--surface-tertiary: #1e293b;
+	--primary: #4ea8de;
+	--primary-hover: #5fb3e8;
+	--primary-light: #70bef0;
+	--primary-dark: #3d97cc;
+	--surface-hover: #1f2937;
+	--text-tertiary: #9ca3af;
+	--card-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+html[data-color-scheme='warm'][data-theme='light'] {
+	--accent: #f4a27d;
+	--background: #fffefc;
+	--foreground: #2d3748;
+	--muted: #718096;
+	--border: #fbeee1;
+	--surface: #ffffff;
+	--surface-secondary: #fff8f1;
+	--surface-tertiary: #f9efe3;
+	--primary: #f4a27d;
+	--primary-hover: #ffb898;
+	--primary-light: #f9ded1;
+	--primary-dark: #e89168;
+	--surface-hover: #fff8f1;
+	--text-tertiary: #a0aec0;
+}
+
+html[data-color-scheme='warm'][data-theme='dark'] {
+	--accent: #e89168;
+	--background: #1a1f2e;
+	--foreground: #f7fafc;
+	--muted: #cbd5e0;
+	--border: #3d4556;
+	--surface: #2d3548;
+	--surface-secondary: #384056;
+	--surface-tertiary: #252b3b;
+	--primary: #e89168;
+	--primary-hover: #f4a27d;
+	--primary-light: #ffb898;
+	--primary-dark: #d17e57;
+	--surface-hover: #384056;
+	--text-tertiary: #a0aec0;
+}
+
+html[data-color-scheme='academic'][data-theme='light'] {
+	--accent: #1e6f9f;
+	--background: #f7f9fb;
+	--foreground: #111827;
+	--border: #e4e7ec;
+	--surface: #ffffff;
+	--surface-secondary: #fafbfc;
+	--surface-tertiary: #f0f3f6;
+	--primary: #1e6f9f;
+	--primary-hover: #2a82b8;
+	--primary-light: #4ea8de;
+	--primary-dark: #165a82;
+}
+
+html[data-color-scheme='academic'][data-theme='dark'] {
+	--accent: #4ea8de;
+	--background: #0f172a;
+	--foreground: #f9fafb;
+	--border: #374151;
+	--surface: #111827;
+	--surface-secondary: #1f2937;
+	--surface-tertiary: #1e293b;
+	--primary: #4ea8de;
+	--primary-hover: #5fb3e8;
+	--primary-light: #70bef0;
+	--primary-dark: #3d97cc;
+}
+
+html[data-color-scheme='violet'][data-theme='light'] {
+	--accent: #6366f1;
+	--background: #fafbff;
+	--foreground: #111827;
+	--border: #e0e7ff;
+	--surface: #ffffff;
+	--surface-secondary: #f9fafb;
+	--surface-tertiary: #f4f6fa;
+	--primary: #6366f1;
+	--primary-hover: #7c7ff9;
+	--primary-light: #a5b4fc;
+	--primary-dark: #4f46e5;
+}
+
+html[data-color-scheme='violet'][data-theme='dark'] {
+	--accent: #818cf8;
+	--background: #0f1629;
+	--foreground: #f8fafc;
+	--border: #334155;
+	--surface: #1e293b;
+	--surface-secondary: #2d3748;
+	--surface-tertiary: #1a1f3a;
+	--primary: #818cf8;
+	--primary-hover: #a5b4fc;
+	--primary-light: #c7d2fe;
+	--primary-dark: #6366f1;
+}
+
+html[data-color-scheme='forest'][data-theme='light'] {
+	--accent: #2f5d50;
+	--background: #f6f3ee;
+	--foreground: #1f2937;
+	--border: #e3ded6;
+	--surface: #fffdfc;
+	--surface-secondary: #faf8f6;
+	--surface-tertiary: #ede9e3;
+	--primary: #2f5d50;
+	--primary-hover: #3b7464;
+	--primary-light: #4a8b79;
+	--primary-dark: #254d42;
+}
+
+html[data-color-scheme='forest'][data-theme='dark'] {
+	--accent: #5a9b84;
+	--background: #111715;
+	--foreground: #f9fafb;
+	--border: #2d3430;
+	--surface: #1e2421;
+	--surface-secondary: #262c29;
+	--surface-tertiary: #1a1f1d;
+	--primary: #5a9b84;
+	--primary-hover: #6aab94;
+	--primary-light: #7abba4;
+	--primary-dark: #4a8b74;
+}
+
+html[data-color-scheme='minimal'][data-theme='light'] {
+	--accent: #2563eb;
+	--background: #fafafa;
+	--foreground: #111827;
+	--border: #e5e7eb;
+	--surface: #ffffff;
+	--surface-secondary: #fefefe;
+	--surface-tertiary: #f5f5f5;
+	--primary: #2563eb;
+	--primary-hover: #3b82f6;
+	--primary-light: #60a5fa;
+	--primary-dark: #1d4ed8;
+}
+
+html[data-color-scheme='minimal'][data-theme='dark'] {
+	--accent: #60a5fa;
+	--background: #0f0f0f;
+	--foreground: #fafafa;
+	--border: #333333;
+	--surface: #171717;
+	--surface-secondary: #262626;
+	--surface-tertiary: #1a1a1a;
+	--primary: #60a5fa;
+	--primary-hover: #3b82f6;
+	--primary-light: #93c5fd;
+	--primary-dark: #2563eb;
+}
+
+html,
+body.geEditor,
+.geEditor,
+.mxWindow,
+.geDialog {
+	font-family: var(--app-font-family);
+	color: var(--foreground);
+}
+
+html[data-theme='light'] body.geEditor,
+html[data-theme='light'] .geEditor {
+	color-scheme: light;
+}
+
+html[data-theme='dark'] body.geEditor,
+html[data-theme='dark'] .geEditor {
+	color-scheme: dark;
+}
+
+body.geEditor,
+.geEditor {
+	background: var(--background);
+	grid-template-rows: min-content min-content 1fr 0;
+}
+
+.geEditor > .geMenubarContainer,
+.geEditor > .geToolbarContainer:not(.geVerticalToolbar),
+.geEditor > .geSidebarContainer,
+.geFormatTitleContainer,
+.geFormatContent {
+	background: var(--surface);
+	border-color: var(--border);
+	color: var(--foreground);
+}
+
+.geEditor > .geDiagramContainer {
+	background: var(--background);
+}
+
+.geMenubar,
+.geToolbar,
+.geSidebarContainer,
+.geFormatContainer,
+.geStatus,
+.geStatus *,
+.geSidebarText,
+.geFormatTitle,
+.geButton,
+.geTitle,
+.geItem {
+	color: var(--foreground);
+}
+
+.geButton,
+.geTitle,
+.geItem,
+.geMenubarContainer .geItem,
+.geButtonGroup,
+.geButtonGroup .geButton,
+.geButton.geZoomInput {
+	border-radius: var(--radius-sm);
+}
+
+.geEditor .geButton,
+.geEditor .geTitle,
+.geEditor .geItem,
+.geEditor .geStatus > div,
+.geEditor button,
+.geEditor select,
+html table.mxPopupMenu tr.mxPopupMenuItem {
+	opacity: 1;
+	transition:
+		background-color 0.12s ease,
+		border-color 0.12s ease,
+		color 0.12s ease,
+		box-shadow 0.12s ease;
+}
+
+.geEditor .geButton:hover:not(.mxDisabled, .mxDisabled *, [disabled], .gePageTab *, .geSimpleMainMenu *, .geBtn *, .geButtonGroup *, .geAdaptiveAsset, .gePrimaryBtn),
+.geEditor .geItem:hover:not(.mxDisabled, [disabled]),
+.geEditor .geTitle:hover,
+table.mxPopupMenu tr.mxPopupMenuItemHover {
+	background-color: var(--surface-hover);
+	color: var(--foreground);
+	box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border) 72%, transparent);
+}
+
+.geEditor .geToolbarContainer .geButton,
+.geEditor .geToolbarContainer .geButton:hover,
+.geEditor .geToolbarContainer .geButton:active,
+.geEditor .geMenubarContainer .geButton,
+.geEditor .geMenubarContainer .geButton:hover,
+.geEditor .geMenubarContainer .geButton:active,
+.geEditor .geSidebar .geItem,
+.geEditor .geSidebar .geItem:hover,
+.geEditor .geSidebar .geItem:active,
+.geEditor .geShapePicker .geItem,
+.geEditor .geShapePicker .geItem:hover,
+.geEditor .geShapePicker .geItem:active {
+	transform: none !important;
+}
+
+.geEditor .geTitle .geButton:hover {
+	border-color: transparent;
+	box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border) 72%, transparent);
+}
+
+.geEditor .geButton:active:not(.mxDisabled, .mxDisabled *, [disabled], .geBtn *),
+.geEditor .geItem:active:not(.mxDisabled, [disabled]),
+.geEditor .geTitle:active,
+.geEditor .geStatus:has(div[data-action]:not(.mxDisabled, [disabled])):active,
+.geEditor button:active:not([disabled], .geBigButton, .geShareBtn),
+html table.mxPopupMenu tr.mxPopupMenuItemHover:active {
+	background-color: var(--accent-soft);
+	color: var(--foreground);
+	opacity: 1;
+	box-shadow: inset 0 0 0 1px var(--accent-border);
+}
+
+.geActiveItem:not(.geButton *, .geButton *),
+.geFormatTitle.geActiveFormatTitle,
+.gePageTab .geButton:hover:not([disabled]),
+.geButtonGroup .geButton:hover:not([disabled]) {
+	background-color: var(--accent-soft);
+	color: var(--primary);
+	box-shadow: inset 0 0 0 1px var(--accent-border);
+}
+
+.geEditor .geButton.mxDisabled,
+.geEditor .geButton[disabled],
+.geEditor .geItem.mxDisabled,
+.geEditor .geItem[disabled] {
+	opacity: 0.42;
+	box-shadow: none;
+}
+
+.geEditor .geButton.mxDisabled:hover,
+.geEditor .geButton[disabled]:hover,
+.geEditor .geItem.mxDisabled:hover,
+.geEditor .geItem[disabled]:hover {
+	background-color: transparent;
+}
+
+.geSidebarContainer:not(.geFormatContainer, .mxWindowPane *),
+.geFormatContainer:not(.mxWindowPane *),
+.geToolbarContainer .geSeparator,
+.geFormatTitleContainer,
+.geTabContainer {
+	border-color: var(--border);
+}
+
+/* WisePen 嵌入态不展示 DrawIO 的外部入口、底部栏和多页图入口。 */
+.geFooterContainer,
+.geFooterToolbar,
+.geHelpIcon,
+.geEditor .geHelpIcon,
+.geTabContainer,
+.geEditor > .geTabContainer,
+.geTabContainer .gePageTab,
+.geTabContainer .geControlTab,
+.geTabContainer > a[href*="github.com/jgraph/drawio"],
+.geButton.gePageMenu {
+	display: none !important;
+}
+
+html body div.mxPopupMenu,
+html body .mxWindow,
+.geDialog,
+.geEditor .picker-dialog,
+.geEditor .picker-dialog-bg {
+	background: var(--overlay);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--card-shadow);
+	color: var(--overlay-foreground);
+}
+
+html table.mxPopupMenu td.mxPopupMenuItem,
+html tr.mxPopupMenuItem,
+html td.mxPopupMenuItem {
+	color: var(--overlay-foreground);
+}
+
+html body td.mxWindowTitle,
+div td.mxWindowTitle,
+.geDialogTitle,
+.geDialogFooter {
+	background: var(--surface);
+	border-color: var(--border);
+	color: var(--foreground);
+}
+
+.gePrimaryBtn,
+.geSidebarFooter .gePrimaryBtn {
+	background-color: var(--primary);
+	border-color: var(--primary);
+	color: var(--accent-foreground);
+}
+
+html body.geEditor .gePrimaryBtn:hover:not([disabled]) {
+	background-color: var(--primary-hover);
+	border-color: var(--primary-hover);
+	color: var(--accent-foreground);
+}
+
+.geEditor input,
+.geEditor select,
+.geEditor textarea,
+.geButton.geZoomInput {
+	background-color: var(--field-background);
+	border-color: var(--border);
+	color: var(--field-foreground);
+}
+
+.geEditor input:focus,
+.geEditor select:focus,
+.geEditor textarea:focus {
+	border-color: var(--focus);
+	box-shadow: 0 0 0 2px color-mix(in srgb, var(--focus) 20%, transparent);
+	outline: none;
+}
+
+.geEditor ::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+.geEditor ::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.geEditor ::-webkit-scrollbar-thumb {
+	background: var(--scrollbar);
+	border-radius: 999px;
+}
+
+.geEditor ::-webkit-scrollbar-thumb:hover {
+	background: var(--scrollbar-hover-color);
+}

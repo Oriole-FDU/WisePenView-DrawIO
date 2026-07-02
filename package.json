@@ -1,0 +1,16 @@
+{
+  "name": "@wisepen/drawio-static",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-static.mjs",
+    "dev": "node scripts/build-static.mjs && vite --host 0.0.0.0 --port 5174 dist",
+    "dev:source": "vite --host 0.0.0.0 --port 5174 src/main/webapp",
+    "serve": "vite --host 0.0.0.0 --port 5174 dist",
+    "url": "node scripts/print-editor-url.mjs"
+  },
+  "devDependencies": {
+    "vite": "^7.2.4"
+  }
+}
