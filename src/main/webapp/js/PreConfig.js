@@ -62,37 +62,11 @@ urlParams['page'] = '0';
 	]);
 })();
 
-(function()
+// 明暗由宿主决定，覆盖 DrawIO 本地保存的独立外观设置。
+urlParams['dark'] = document.documentElement.getAttribute('data-theme') == 'dark' ? '1' : '0';
+if (urlParams['wisepenOrigin'] != null)
 {
-	// WisePenView 通过 iframe URL 传入主题，DrawIO 独立运行时使用默认浅色主题。
-	var theme = urlParams['wisepenTheme'] || urlParams['wisepen-theme'] || 'light';
-	var colorScheme = urlParams['wisepenColorScheme'] || urlParams['wisepen-color-scheme'] || 'default';
-	var allowedThemes = {'light': true, 'dark': true};
-	var allowedColorSchemes = {
-		'default': true,
-		'warm': true,
-		'academic': true,
-		'violet': true,
-		'forest': true,
-		'minimal': true
-	};
-
-	if (!allowedThemes[theme])
-	{
-		theme = 'light';
-	}
-
-	if (!allowedColorSchemes[colorScheme])
-	{
-		colorScheme = 'default';
-	}
-
-	document.documentElement.setAttribute('data-theme', theme);
-	document.documentElement.setAttribute('data-color-scheme', colorScheme);
-	document.documentElement.classList.toggle('dark', theme == 'dark');
-
-	if (theme == 'dark' && urlParams['dark'] == null)
-	{
-		urlParams['dark'] = '1';
-	}
-})();
+	window.DRAWIO_CONFIG.hideMenuItems = window.DRAWIO_CONFIG.hideMenuItems.concat([
+		'appearance', 'theme', 'lightMode', 'darkMode', 'autoMode'
+	]);
+}

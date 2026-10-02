@@ -242,7 +242,10 @@ function checkAllLoaded()
 {
     if (mxScriptsLoaded && mxWinLoaded)
     {
-        App.main();				
+        App.main(function(ui)
+        {
+            if (window.WisePenTheme != null) window.WisePenTheme.attach(ui);
+        });
     }
 };
 
@@ -369,5 +372,4 @@ window.onerror = function()
         status.innerHTML = 'Page could not be loaded. Please try refreshing.';
     }
 };
-
 

@@ -4,6 +4,8 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
+    "test": "node --test scripts/wise-pen-theme.test.mjs",
+    "sync:theme": "node scripts/sync-wisepen-theme.mjs",
     "build": "node scripts/build-static.mjs",
     "dev": "node scripts/build-static.mjs && vite --host 0.0.0.0 --port 5174 dist",
     "dev:source": "vite --host 0.0.0.0 --port 5174 src/main/webapp",
