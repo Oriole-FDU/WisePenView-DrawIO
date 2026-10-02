@@ -17,6 +17,9 @@ if (typeof AJS === 'undefined') // conf insists on pulling in this file into bat
 	}
 	else
 	{
-		App.main();
+		App.main(function(ui)
+		{
+			if (window.WisePenTheme != null) window.WisePenTheme.attach(ui);
+		});
 	}
 }
